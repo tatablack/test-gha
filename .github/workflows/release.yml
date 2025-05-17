@@ -55,6 +55,4 @@ jobs:
           git add .
           git commit -m ${new_version_short}
           git tag -a ${new_version} -m "${new_version}"
-          git push --tags
-        env:
-          GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
+          git push --tags https://x-access-token:${{ steps.generate_token.outputs.token }}@github.com/${{ github.repository }}.git HEAD:${{ github.ref }}
