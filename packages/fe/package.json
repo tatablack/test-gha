@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Sample app to test release procedures",
   "main": "index.js",
+  "engines": {
+    "node": "^20.11.0"
+  },
   "scripts": {
     "dist": "cp packages/fe/package.json docs/",
     "versions": "pnpm run dist && git status && git add -A ../../docs"
@@ -16,5 +19,6 @@
   "bugs": {
     "url": "https://github.com/tatablack/test-gha/issues"
   },
-  "homepage": "https://github.com/tatablack/test-gha#readme"
+  "homepage": "https://github.com/tatablack/test-gha#readme",
+  "packageManager": "pnpm@10.10.0+sha256.fa0f513aa8191764d2b6b432420788c270f07b4f999099b65bb2010eec702a30"
 }
