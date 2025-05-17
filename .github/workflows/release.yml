@@ -53,6 +53,6 @@ jobs:
           new_version=$(npm version ${operation//\"/})
           new_version_short=$(cat package.json | jq ".version")
           git add .
-          git commit -m ${new_version_short}
+          git commit -m ${new_version_short//\"/}
           git tag -a ${new_version} -m "${new_version}"
           git push --tags https://x-access-token:${{ steps.generate_token.outputs.token }}@github.com/${{ github.repository }}.git HEAD:${{ github.ref }}
