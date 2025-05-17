@@ -1,0 +1,20 @@
+{
+  "name": "test-gha",
+  "version": "0.9.2",
+  "description": "Sample app to test release procedures",
+  "main": "index.js",
+  "scripts": {
+    "dist": "cp packages/fe/package.json docs/",
+    "versions": "pnpm run dist && git status && git add -A ../../docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tatablack/test-gha.git"
+  },
+  "author": "angelo.tata@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tatablack/test-gha/issues"
+  },
+  "homepage": "https://github.com/tatablack/test-gha#readme"
+}
