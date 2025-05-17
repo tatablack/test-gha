@@ -57,4 +57,4 @@ jobs:
           git tag -a ${new_version} -m "${new_version}"
           git push --tags
         env:
-          GH_TOKEN: ${{ steps.generate_token.outputs.token }}
+          GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
