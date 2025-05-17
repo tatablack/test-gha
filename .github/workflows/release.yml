@@ -33,7 +33,6 @@ jobs:
         uses: actions/checkout@v4
         with:
           token: "${{ steps.generate_token.outputs.token }}"
-          ref: ${{ github.head_ref }}
           # Make sure the value of GITHUB_TOKEN will not be persisted in repo's config
           persist-credentials: false
       - name: Get GitHub App User ID
@@ -58,4 +57,4 @@ jobs:
           git tag -a ${new_version} -m "${new_version}"
           git push --tags
         env:
-          GH_TOKEN: ${{ steps.generate_token.outputs.token }}
+          GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
