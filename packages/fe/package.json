@@ -1,6 +1,6 @@
 {
   "name": "test-gha",
-  "version": "0.9.2",
+  "version": "0.10.0",
   "description": "Sample app to test release procedures",
   "main": "index.js",
   "scripts": {
