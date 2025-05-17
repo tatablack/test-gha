@@ -29,6 +29,7 @@ jobs:
           owner: ${{ github.repository_owner }}
           repositories: |
             test-gha
+
       - name: Checkout repo
         uses: actions/checkout@v4
         with:
@@ -40,12 +41,40 @@ jobs:
         run: echo "user-id=$(gh api "/users/${{ steps.generate_token.outputs.app-slug }}[bot]" --jq .id)" >> "$GITHUB_OUTPUT"
         env:
           GH_TOKEN: ${{ steps.generate_token.outputs.token }}
+
       - name: Configure git user
         run: |
           git config --global user.name '${{ steps.generate_token.outputs.app-slug }}[bot]'
           git config --global user.email '${{ steps.get-user-id.outputs.user-id }}+${{ steps.generate_token.outputs.app-slug }}[bot]@users.noreply.github.com'
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version-file: packages/fe/package.json
+          
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        run: |
+          echo "store_path=$(pnpm store path)" >> $GITHUB_OUTPUT
+          
+      - name: Setup pnpm cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.pnpm-cache.outputs.store_path }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+            
+      - name: Install dependencies
+        run: cd packages/fe && pnpm install
+
       - name: Bump version
         run: |
+          node --version
+          pnpm --version
           # We pull the type of version increase from the PR labels
           operation=$(echo '${{toJSON(github.event.pull_request.labels.*.name)}}' | jq '.[] | select(. as $item | ["major", "minor", "patch"] | contains([$item]))')
           echo "Creating a new ${operation} version"
