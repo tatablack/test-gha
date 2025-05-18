@@ -88,6 +88,6 @@ jobs:
           npm version --no-git-tag-version ${operation//\"/}
           new_version=$(cat package.json | jq ".version")
           git add .
-          git commit -m "${new_version}"
-          git tag -a v${new_version} -m "v${new_version}"
+          git commit -m ${new_version}
+          git tag -a v${new_version} -m "v${new_version//\"/}"
           git push --tags https://x-access-token:${{ steps.generate_token.outputs.token }}@github.com/${{ github.repository }}.git HEAD:${{ github.ref }}
