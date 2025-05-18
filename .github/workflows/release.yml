@@ -87,7 +87,7 @@ jobs:
           cd packages/fe
           npm version --no-git-tag-version ${bump_type}
           new_version=$(cat package.json | jq ".version" | tr -d '"')
-          git add .
+          git add ../..
           git commit -m ${new_version}
           git tag -a v${new_version} -m v${new_version}
           git push --tags https://x-access-token:${{ steps.generate_token.outputs.token }}@github.com/${{ github.repository }}.git HEAD:${{ github.ref }}
