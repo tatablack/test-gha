@@ -8,7 +8,7 @@
   },
   "scripts": {
     "dist": "cp packages/fe/package.json docs/",
-    "versions": "pnpm run dist && git status && git add -A ../../docs"
+    "version": "echo 'This is a different test' > ../../docs/index.html"
   },
   "repository": {
     "type": "git",
