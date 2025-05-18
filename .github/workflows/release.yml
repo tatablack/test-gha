@@ -8,6 +8,8 @@
 # tag the commit, and push it straight to main.
 
 name: production-build
+permissions:
+  contents: read
 on:
   pull_request:
     types: [closed]
